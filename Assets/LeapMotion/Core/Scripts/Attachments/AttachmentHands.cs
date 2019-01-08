@@ -102,8 +102,8 @@ namespace Leap.Unity.Attachments {
 
     void Update() {
       #if UNITY_EDITOR
-      PrefabType prefabType = PrefabUtility.GetPrefabType(this.gameObject);
-      if (prefabType == PrefabType.Prefab || prefabType == PrefabType.ModelPrefab) {
+      PrefabAssetType prefabType = PrefabUtility.GetPrefabAssetType(this.gameObject);
+      if (prefabType == PrefabAssetType.Regular || prefabType == PrefabAssetType.Model) {
         return;
       }
       #endif
@@ -236,12 +236,9 @@ namespace Leap.Unity.Attachments {
 
 #if UNITY_EDITOR
     private bool getIsPrefab() {
-      PrefabType prefabType = PrefabUtility.GetPrefabType(this.gameObject);
-      return (prefabType == PrefabType.Prefab || prefabType == PrefabType.ModelPrefab);
+      PrefabAssetType prefabType = PrefabUtility.GetPrefabAssetType(this.gameObject);
+      return (prefabType == PrefabAssetType.Regular || prefabType == PrefabAssetType.Model);
     }
 #endif
-
   }
-
-
 }

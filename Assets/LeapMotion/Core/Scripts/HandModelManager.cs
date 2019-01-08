@@ -486,18 +486,16 @@ namespace Leap.Unity {
     }
 
     private bool shouldBeSpawned(UnityEngine.Object model) {
-      var prefabType = PrefabUtility.GetPrefabType(model);
-      if (PrefabUtility.GetPrefabType(this) != PrefabType.Prefab) {
-        return prefabType == PrefabType.Prefab;
+      var prefabType = PrefabUtility.GetPrefabAssetType(model);
+      if (PrefabUtility.GetPrefabAssetType(this) != PrefabAssetType.Regular) {
+        return prefabType == PrefabAssetType.Regular;
       } else {
-        return PrefabUtility.GetPrefabObject(model) != PrefabUtility.GetPrefabObject(this);
+        return PrefabUtility.GetPrefabInstanceHandle(model) != PrefabUtility.GetPrefabInstanceHandle(this);
       }
     }
 
     #endif
-
     #endregion
-
   }
 }
 
