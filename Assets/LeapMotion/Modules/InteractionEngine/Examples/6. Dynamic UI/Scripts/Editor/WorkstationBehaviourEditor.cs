@@ -19,11 +19,22 @@ namespace Leap.Unity.Examples {
   public class WorkstationBehaviourEditor : CustomEditorBase<WorkstationBehaviourExample> {
 
     public override void OnInspectorGUI() {
-      EditorGUI.BeginDisabledGroup(target.workstationModeTween == null
-                                   || target.workstationModeTween.targetTransform == null
-                                   || target.workstationModeTween.startTransform == null
-                                   || target.workstationModeTween.endTransform == null
-                                   || PrefabUtility.GetPrefabType(target.gameObject) == PrefabType.Prefab);
+
+      #if UNITY_2017
+        EditorGUI.BeginDisabledGroup(target.workstationModeTween == null
+                                    || target.workstationModeTween.targetTransform == null
+                                    || target.workstationModeTween.startTransform == null
+                                    || target.workstationModeTween.endTransform == null
+                                    || PrefabUtility.GetPrefabType(target.gameObject) == PrefabType.Prefab);
+      #endif
+
+      #if UNITY_2018
+        EditorGUI.BeginDisabledGroup(target.workstationModeTween == null
+                                    || target.workstationModeTween.targetTransform == null
+                                    || target.workstationModeTween.startTransform == null
+                                    || target.workstationModeTween.endTransform == null
+                                    || PrefabUtility.GetPrefabAssetType(target.gameObject) == PrefabAssetType.Regular);
+      #endif
 
       EditorGUILayout.BeginHorizontal();
 
@@ -53,7 +64,5 @@ namespace Leap.Unity.Examples {
 
       base.OnInspectorGUI();
     }
-
   }
-
 }

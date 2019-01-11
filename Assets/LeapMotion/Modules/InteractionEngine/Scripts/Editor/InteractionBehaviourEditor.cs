@@ -48,13 +48,21 @@ namespace Leap.Unity.Interaction {
     private void drawInteractionManagerDecorator(SerializedProperty property) {
       bool shouldDrawInteractionManagerNotSetWarning = false;
       foreach (var target in targets) {
-        if (PrefabUtility.GetPrefabType(target) == PrefabType.Prefab) continue;
+
+        #if UNITY_2017
+          if (PrefabUtility.GetPrefabType(target) == PrefabType.Prefab) continue;
+        #endif
+
+        #if UNITY_2018
+          if (PrefabUtility.GetPrefabAssetType(target) == PrefabAssetType.Regular) continue;
+        #endif
 
         if (target.manager == null) {
           shouldDrawInteractionManagerNotSetWarning = true;
           break;
         }
       }
+
       if (shouldDrawInteractionManagerNotSetWarning) {
         bool pluralTargets = targets.Length > 1;
         string noManagerSetWarningMessage = "";
@@ -95,7 +103,14 @@ namespace Leap.Unity.Interaction {
         }
         else {
           foreach (var target in targets) {
-            if (PrefabUtility.GetPrefabType(target) == PrefabType.Prefab) continue;
+
+            #if UNITY_2017
+              if (PrefabUtility.GetPrefabType(target) == PrefabType.Prefab) continue;
+            #endif
+
+            #if UNITY_2018
+              if (PrefabUtility.GetPrefabAssetType(target) == PrefabAssetType.Regular) continue;
+            #endif
 
             Undo.RecordObject(target, "Auto-set Interaction Manager");
             target.manager = manager;

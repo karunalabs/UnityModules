@@ -6,10 +6,6 @@
  * https://developer.leapmotion.com/sdk_agreement, or another agreement       *
  * between Leap Motion and you, your company or other organization.           *
  ******************************************************************************/
-
-using Leap.Unity.Query;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
@@ -41,9 +37,17 @@ namespace Leap.Unity.Animation {
 
       drawScriptField();
 
-      EditorGUI.BeginDisabledGroup(target.targetTransform == null
-                                  || target.startTransform == null
-                                  || PrefabUtility.GetPrefabType(target.gameObject) == PrefabType.Prefab);
+      #if UNITY_2017
+        EditorGUI.BeginDisabledGroup(target.targetTransform == null
+                                    || target.startTransform == null
+                                    || PrefabUtility.GetPrefabType(target.gameObject) == PrefabType.Prefab);
+      #endif
+
+      #if UNITY_2018
+        EditorGUI.BeginDisabledGroup(target.targetTransform == null
+                                    || target.startTransform == null
+                                    || PrefabUtility.GetPrefabAssetType(target.gameObject) == PrefabAssetType.Regular);
+      #endif 
       
       EditorGUILayout.BeginHorizontal();
 
@@ -60,9 +64,17 @@ namespace Leap.Unity.Animation {
 
       EditorGUI.EndDisabledGroup();
 
-      EditorGUI.BeginDisabledGroup(target.targetTransform == null
-                                  || target.endTransform == null
-                                  || PrefabUtility.GetPrefabType(target.gameObject) == PrefabType.Prefab);
+      #if UNITY_2017
+        EditorGUI.BeginDisabledGroup(target.targetTransform == null
+                                   || target.endTransform == null
+                                   || PrefabUtility.GetPrefabType(target.gameObject) == PrefabType.Prefab);
+      #endif
+
+      #if UNITY_2018
+              EditorGUI.BeginDisabledGroup(target.targetTransform == null
+                                   || target.endTransform == null
+                                   || PrefabUtility.GetPrefabAssetType(target.gameObject) == PrefabAssetType.Regular);
+      #endif
 
       if (GUILayout.Button(new GUIContent("Set Target" + (targets.Length > 1 ? "s" : "") + " To End",
                                           "If this TransformTweenBehaviour has a valid target and end transform, "
@@ -81,7 +93,5 @@ namespace Leap.Unity.Animation {
 
       base.OnInspectorGUI();
     }
-
   }
-
 }

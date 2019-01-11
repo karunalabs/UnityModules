@@ -33,7 +33,14 @@ namespace Leap.Unity {
     }
 
     public static bool IsPrefab(Component component) {
-      return PrefabUtility.GetPrefabType(component.gameObject) == PrefabType.Prefab;
+      
+      #if UNITY_2017
+        return PrefabUtility.GetPrefabType(component.gameObject) == PrefabType.Prefab;
+      #endif
+
+      #if UNITY_2018
+        return PrefabUtility.GetPrefabAssetType(component.gameObject) == PrefabAssetType.Regular;
+      #endif
     }
 
     /// <summary>

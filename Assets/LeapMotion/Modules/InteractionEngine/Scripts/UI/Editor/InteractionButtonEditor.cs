@@ -27,12 +27,24 @@ namespace Leap.Unity.Interaction {
 
       bool nonzeroRotation = button.transform.localRotation != Quaternion.identity;
       bool isRoot = button.transform == button.transform.root;
-      PrefabType objectType = PrefabUtility.GetPrefabType(button.gameObject);
-      bool isNotAnUninstantiatedPrefab = 
-        objectType == PrefabType.None || 
-        objectType == PrefabType.PrefabInstance || 
-        objectType == PrefabType.MissingPrefabInstance ||
-        objectType == PrefabType.DisconnectedPrefabInstance;
+
+      #if UNITY_2017
+        PrefabType objectType = PrefabUtility.GetPrefabType(button.gameObject);
+        bool isNotAnUninstantiatedPrefab = 
+          objectType == PrefabType.None || 
+          objectType == PrefabType.PrefabInstance || 
+          objectType == PrefabType.MissingPrefabInstance ||
+          objectType == PrefabType.DisconnectedPrefabInstance;
+      #endif
+
+      #if UNITY_2018
+        PrefabAssetType objectType = PrefabUtility.GetPrefabAssetType(button.gameObject);
+        bool isNotAnUninstantiatedPrefab = 
+          objectType == PrefabAssetType.NotAPrefab || 
+          objectType == PrefabAssetType.Regular || 
+          objectType == PrefabAssetType.MissingAsset ||
+          objectType == PrefabAssetType.Variant;
+      #endif
 
       EditorGUILayout.BeginHorizontal();
       if ((nonzeroRotation || isRoot) && isNotAnUninstantiatedPrefab) {

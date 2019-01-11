@@ -35,7 +35,6 @@ namespace Leap.LeapCSharp.Tests {
       Boolean isEqual = thisDevice == thatDevice;
       // !!!END
       Assert.False(isEqual);
-
     }
 
     [Test()]
@@ -46,7 +45,6 @@ namespace Leap.LeapCSharp.Tests {
         Console.WriteLine(allDevices[index]);
       }
       // !!!END
-
     }
 
     [Test()]

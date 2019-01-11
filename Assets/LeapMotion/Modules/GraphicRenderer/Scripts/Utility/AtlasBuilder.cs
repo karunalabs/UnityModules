@@ -340,7 +340,7 @@ namespace Leap.Unity.GraphicalRenderer {
 
             progress.Step("Compressing Texture");
 #if UNITY_EDITOR
-            UnityEditor.EditorUtility.CompressTexture(tex, _format, TextureCompressionQuality.Best);
+            UnityEditor.EditorUtility.CompressTexture(tex, _format, (int)TextureCompressionQuality.Best);
 #endif
             tex.filterMode = _filterMode;
 
@@ -359,6 +359,7 @@ namespace Leap.Unity.GraphicalRenderer {
                                       out Texture2D packedTexture,
                                       out Texture2D[] rawTextureArray,
                                       out Texture2D[] processedTextureArray) {
+                                        
       if (_extraTextures == null) {
         _extraTextures = new TextureReference[0];
       }

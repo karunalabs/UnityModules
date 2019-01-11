@@ -630,14 +630,25 @@ namespace Leap.Unity {
     public static T FindObjectInHierarchy<T>() where T : UnityEngine.Object {
       return Resources.FindObjectsOfTypeAll<T>().Query()
         .Where(o => {
-#if UNITY_EDITOR
-          // Exclude prefabs.
-          var prefabType = UnityEditor.PrefabUtility.GetPrefabType(o);
-          if (prefabType == UnityEditor.PrefabType.ModelPrefab
-          || prefabType == UnityEditor.PrefabType.Prefab) {
-            return false;
-          }
-#endif
+        #if UNITY_EDITOR
+          #if UNITY_2017
+            // Exclude prefabs.
+            var prefabType = UnityEditor.PrefabUtility.GetPrefabType(o);
+            if (prefabType == UnityEditor.PrefabType.ModelPrefab
+            || prefabType == UnityEditor.PrefabType.Prefab) {
+              return false;
+            }
+          #endif
+
+          #if UNITY_2018
+            // Exclude prefabs.
+            var prefabType = UnityEditor.PrefabUtility.GetPrefabAssetType(o);
+            if (prefabType == UnityEditor.PrefabAssetType.Model
+            || prefabType == UnityEditor.PrefabAssetType.Regular) {
+              return false;
+            }
+          #endif
+        #endif
           return true;
         })
         .FirstOrDefault();
@@ -1347,8 +1358,16 @@ namespace Leap.Unity {
       TextureFormat.EAC_R_SIGNED,
       TextureFormat.EAC_RG,
       TextureFormat.EAC_RG_SIGNED,
+      
+      #if UNITY_2017
       TextureFormat.ETC_RGB4_3DS,
       TextureFormat.ETC_RGBA8_3DS
+      #endif
+
+      #if UNITY_2018
+      TextureFormat.ETC_RGB4Crunched,
+      TextureFormat.ETC2_RGBA8Crunched
+      #endif
     };
 
     /// <summary>
