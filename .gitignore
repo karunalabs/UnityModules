@@ -1,3 +1,5 @@
+# Global File Extensions
+
 *.sln
 *.userprefs
 *.csproj
@@ -14,21 +16,6 @@
 *.exe
 *_Data/
 
-/Library/*
-/Library/FailedAssetImports.txt
-/Library/cache/
-/Library/previews/
-/Library/ScriptAssemblies
-/obj
-/Temp
-ExportedObj/
-Temp/
-[Bb]uild/
-[Bb]uilds/
-
-.vs/
-.vscode/
-
 *~
 *.swp
 *.Trashes
@@ -39,5 +26,22 @@ Thumbs.db
 .DS_Store
 .DS_Store?
 
-*_ElementData*
-UnityPlayer.dll
+# Editor Configurations
+
+.vs/
+.vscode/
+
+# Build Artifacts
+
+[Bb]uild/
+[Bb]uilds/
+
+# Unity Project Files
+
+external_leapmotion_sdk_unity/[Ee]xported[Oo]bj/
+external_leapmotion_sdk_unity/[Ll]ibrary/
+external_leapmotion_sdk_unity/[Tt]emp/
+external_leapmotion_sdk_unity/[Oo]bj/
+external_leapmotion_sdk_unity/[Tt]emp/
+external_leapmotion_sdk_unity/*_ElementData*
+external_leapmotion_sdk_unity/UnityPlayer.dll
