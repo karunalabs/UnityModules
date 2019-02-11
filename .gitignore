@@ -28,8 +28,8 @@ Thumbs.db
 
 # Editor Configurations
 
-.vs/
-.vscode/
+**/.vs/
+**/.vscode/
 
 # Build Artifacts
 
@@ -43,5 +43,3 @@ external_leapmotion_sdk_unity/[Ll]ibrary/
 external_leapmotion_sdk_unity/[Tt]emp/
 external_leapmotion_sdk_unity/[Oo]bj/
 external_leapmotion_sdk_unity/[Tt]emp/
-external_leapmotion_sdk_unity/*_ElementData*
-external_leapmotion_sdk_unity/UnityPlayer.dll
